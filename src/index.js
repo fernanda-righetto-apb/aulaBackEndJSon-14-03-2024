@@ -19,8 +19,9 @@ function extraiLinks(texto){
 
     // console.log(capturas);
     // console.log(resultados);
-    return resultados;
-
+    //operador ternário(if else) =>  ?(algo caso true):(algo caso false)
+    return resultados.length!==0?resultados:"Não há links no arquivo";
+    //tamanho - quantas coisas tem ali dentro -> .length pra vetor
 }
 
 // extraiLinks(texto);
@@ -81,7 +82,8 @@ async function pegaArquivo(caminhoDoArquivo){
         const encoding ="utf-8";
         const texto= await fs.promises.readFile(caminhoDoArquivo,encoding);
         // console.log(chalk.cyan(texto));
-        console.log(extraiLinks(texto));
+      //1) console.log(extraiLinks(texto));
+        return extraiLinks(texto);
     } catch (erro) {
         trataErro(erro);
     } finally {
