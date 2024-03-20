@@ -102,3 +102,8 @@ export default pegaArquivo;
 // pegaArquivo('./arquivos/texto.md');
 //pegaArquivo('./arquivos/');
 
+
+
+
+
+//OBSERVAÇÃO: repetir várias vezes no terminal - vale a pena escrever o script cli (no caso aqui desse código no arquivo package.json na área de scripts)

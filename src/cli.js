@@ -10,23 +10,42 @@ import chalk from "chalk";
 //valor de argumento - argv
 // process
 const caminho = process.argv;
-console.log(caminho);
+//console.log(caminho);
 
 //pegaArquivo(caminho[2]);
+
+//função imprimir no terminal
+function imprimeLista(resultado, identificador=""){
+    console.log(chalk.yellow('Lista de links'),
+    chalk.black.bgGreen(identificador),
+    resultado);
+}
 
 //tornar função assíncrona (async e await), não fica pendente
 async function processaTexto(argumentos){
     const caminho = argumentos[2];
+    try{
+        fs.statSync(caminho)
+    }
+    //armazena o erro
+    catch(erro){
+        if(erro.code ==="ENOENT"){
+            console.log('Arquivo ou diretório não encontrado!');
+            return;
+        }
+    }
     //usando biblioteca fs um método que identifique se é um arquivo ou não
     if(fs.lstatSync(caminho).isFile()){
         const resultado =await pegaArquivo(caminho);
-        console.log(chalk.yellow('Lista de links'),resultado);
+        imprimeLista(resultado);
+        // console.log(chalk.yellow('Lista de links'),resultado);
     } else if(fs.lstatSync(caminho).isDirectory()){
         const arquivos =await fs.promises.readdir(caminho);
         arquivos.forEach(async(nomeDoArquivo) => {
             const lista =await pegaArquivo(`${caminho}/${nomeDoArquivo}`);
-            console.log(`${caminho}/${nomeDoArquivo}`);
-            console.log(lista);
+            // console.log(`${caminho}/${nomeDoArquivo}`);
+            // console.log(lista);
+            imprimeLista(lista, nomeDoArquivo);
         })
     }
 
@@ -34,3 +53,6 @@ async function processaTexto(argumentos){
 }
 
 processaTexto(caminho);
+
+
+//node package manager (NPM)- gerenciador de pacotes do node 
