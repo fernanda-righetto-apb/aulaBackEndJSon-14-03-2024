@@ -15,11 +15,11 @@ const caminho = process.argv;
 //pegaArquivo(caminho[2]);
 
 //função imprimir no terminal
-function imprimeLista(valida,resultado, identificador=""){
+async function imprimeLista(valida,resultado, identificador=""){
     if(valida){
         console.log(chalk.yellow('Lista de links'),
         chalk.black.bgGreen(identificador),
-        listaValidada(resultado));
+        await listaValidada(resultado));
     }else{
         console.log(chalk.yellow('Lista de links'),
         chalk.black.bgGreen(identificador),
